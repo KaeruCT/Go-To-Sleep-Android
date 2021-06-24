@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Go To Sleep</title>
+    <link rel="stylesheet" type="text/css" href="./boom.css" media="all">
+    <meta name="theme-color" content="#111133"/>
+    <link rel="manifest" href="./manifest.json">
+  </head>
+  <body>
+    <div class="screen cloud-bg" id="start">
+        <div class="container">
+            <div class="logo">
+                <img src="./sheep.png">
+                Go To Sleep
+            </div>
+            <a class="nav" href="#" data-screen="game">Start Game</a>
+            <a class="nav" href="#" data-screen="about">About</a>
+        </div>  
+    </div>
+    <div class="screen" id="game">
+        <div id="back"><a href="#" data-screen="start">Back to Start</a></div>
+        <div id="time"></div>
+        <div id="count"></div>
+    </div>
+    <div class="screen about-screen" id="about">
+        <div class="container">
+            <div class="logo">
+                <img class="about-star" src="./star.png">
+            </div>
+            <p class="about">
+                Count sheep until you fall asleep!<br>
+                Made with ❤ by<br>Andr&eacute;s Villarreal
+            </p>
+            <br><br>
+            <a class="nav" href="#" data-screen="start">Back to Start</a>
+        </div>
+    </div>
+    <script src="./main.js"></script>
+  </body>
+</html>

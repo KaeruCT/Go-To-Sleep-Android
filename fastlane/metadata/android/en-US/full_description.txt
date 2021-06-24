@@ -1,0 +1,2 @@
+In this simple app, there is no goal but to see how many sheep you can count
+before you fall asleep. Recommended for small children or bored adults.

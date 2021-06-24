@@ -1,0 +1,198 @@
+body, * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow: hidden;
+}
+
+body {
+    background: #000;
+    color: #eee;
+    font-size: 18px;
+    font-family: Helvetica, Tahoma, Geneva, Verdana, sans-serif;
+    touch-action: manipulation;
+}
+
+a {
+    color: #aff;
+    text-decoration: underline;
+}
+
+.screen {
+    background: linear-gradient(#1f1f4b 50%, #300f1a);
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    will-change: transform, filter;
+    transition: transform .6s ease-in;
+}
+
+.about-screen {
+    background: linear-gradient(#181125 50%, #2b0b0e);
+    background-repeat: repeat-x;
+    background-position-y: center;
+    animation: slide-clouds 8s linear infinite;
+    will-change: background-position-x;
+}
+
+.cloud-bg {
+    background:  url(clouds.png), linear-gradient(#325 50%, #5e2538);
+    background-repeat: repeat-x;
+    background-position-y: center;
+    animation: slide-clouds 8s linear infinite;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 40px;
+    padding: 40px;
+    font-size: 30px;
+}
+
+.logo {
+    text-align: center;
+    font-size: 35px;
+    font-weight: 900;
+    color: #ff6;
+    line-height: 100px;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.logo img {
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+}
+
+.about {
+    text-align: center;
+}
+
+.about-star {
+    opacity: 0.8;
+}
+
+.nav {
+    color: #faf;
+    text-decoration: none;
+    background: #636;
+    display: block;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 15px;
+    border: #faf 8px solid;
+    width: 100%;
+    margin-bottom: 40px;
+    will-change: transform, filter;
+    transition: transform .2s ease-in-out, filter .5s ease-in;
+}
+
+.nav:hover {
+    transform: scale(1.1);
+    filter: brightness(150%);
+}
+
+.thread-wrap {
+    position: absolute;
+    will-change: transform;
+    transition: transform 1s ease-in-out;
+}
+
+.thread {
+    transform-origin: 50% 0;
+    animation: swing 4s ease-in-out infinite;
+    display: inline-block;
+    position: relative;
+    width: 2px;
+    border-radius: 5px;
+    will-change: transform;
+    transition: transform 1s ease-in-out;
+}
+
+img {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    user-drag: none;
+    -webkit-touch-callout: none;
+}
+
+.star {
+    position: absolute;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.sheep-wrap {
+    position: absolute;
+    left: -50px;
+}
+
+.sheep {
+    width: 100px;
+    height: 100px;
+}
+
+#back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+}
+
+#time, #count {
+    pointer-events: none;
+    position: absolute;
+    bottom: 0;
+    font-size: 35px;
+    font-weight: 300;
+    padding: 20px;
+}
+
+#time {
+    position: absolute;
+    left: 0;
+}
+
+#count {
+    right: 0;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes swing {
+    0%, 100% {
+        transform: rotate(25deg);
+    }
+    50% {
+        transform: rotate(-25deg);
+    }
+}
+
+@keyframes slide-clouds {
+    0% {
+      background-position-x: 0;
+    }
+    100% {
+      background-position-x: -300px;
+    }
+}
