@@ -11,3 +11,7 @@ This web-based Android app is based on [Android-PWA-Wrapper](https://github.com/
 ![tablet 1](./fastlane/metadata/android/en-US/images/sevenInchScreenshots/1.png)
 
 ![tablet 2](./fastlane/metadata/android/en-US/images/sevenInchScreenshots/2.png)
+
+# Donate
+
+[![Donate using Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/KaeruCT/donate)
