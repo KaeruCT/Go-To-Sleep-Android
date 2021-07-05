@@ -1,6 +1,7 @@
 const gameScreen = {};
 const STAR_ROOT = 10;
 const MAX_SHEEP = 10;
+const BAHS = ["bah1.mp3", "bah2.mp3", "bah3.mp3", "bah4.mp3", "bah5.mp3"];
 let maxSheep;
 let sheepCount;
 let sleepiness;
@@ -156,7 +157,7 @@ function addSheep(x) {
         updateCount();
         threadedSheep.style.transform = `translate(${sheepX}, ${sheepHiddenY})`;
         threadedSheep.querySelector('img').style.animation = 'spin 1s linear infinite';
-        playSound('bah.mp3');
+        playSound(randomElement(BAHS));
         alive = false;
 
         setTimeout(() => {
