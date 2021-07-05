@@ -119,7 +119,7 @@ a {
     transition: transform 1s ease-in-out;
 }
 
-img {
+img, a {
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;

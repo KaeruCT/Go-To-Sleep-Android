@@ -1,7 +1,10 @@
 const gameScreen = {};
-const starRoot = 10;
-let maxSheep = 3;
-let sheepCount = 0;
+const STAR_ROOT = 10;
+const MAX_SHEEP = 10;
+let maxSheep;
+let sheepCount;
+let sleepiness;
+let filterDuration;
 
 const id = id => document.getElementById(id);
 
@@ -31,13 +34,13 @@ function html(html) {
     return template.content.firstChild;
 }
 
+let sounds = {};
 function playSound(file) {
-    const audio = new Audio(file);
+    const audio = sounds[file] || new Audio(file);
+    if (!sounds[file]) sounds[file] = audio;
     audio.play();
 }
 
-let sleepiness = 0;
-let filterDuration = 1000;
 let increasingSleepiness = false;
 function increaseSleepiness () {
     if (increasingSleepiness) return;
@@ -58,6 +61,8 @@ function increaseSleepiness () {
         filterDuration += 200;
         increasingSleepiness = false;
     }, filterDuration);
+
+    maxSheep = Math.min(maxSheep, MAX_SHEEP);
 }
 
 let transitioningScreen = false;
@@ -100,6 +105,9 @@ function updateCount() {
     if (sheepCount % 5 === 0) {
         increaseSleepiness();
     }
+    if (sheepCount % 10 === 0) {
+        setTimeout(() => addSheep(Math.random()), randomRange(1500, 4000));
+    }
 }
 
 function threadBg() {
@@ -121,6 +129,9 @@ function addStar(x, y) {
 }
 
 function addSheep(x) {
+    const sheepAlive = document.querySelectorAll(".thread-wrap").length;
+    if (sheepAlive >= maxSheep) return;
+
     const height = gameScreen.height;
     const halfSheepHeight = 50;
     const threadHeight = gameScreen.height/2;
@@ -157,12 +168,14 @@ function addSheep(x) {
     threadedSheep.addEventListener('mousedown', touchSheep);
 }
 
+let timerTimeout;
 function startCounter() {
+    if (timerTimeout) clearTimeout(timerTimeout);
     let counter = 0;
     function countTime() {
         id('time').innerText = formatSeconds(counter);
         counter += 1;
-        setTimeout(() => {
+        timerTimeout = setTimeout(() => {
             countTime();
         }, 1000);
     }
@@ -170,10 +183,19 @@ function startCounter() {
 }
 
 function initGame() {
-    for (let i = 0; i < starRoot; i++) {
-        for (let j = 0; j < starRoot; j++) {
+    maxSheep = 3;
+    sleepiness = 0;
+    sheepCount = 0;
+    sleepiness = 0;
+    filterDuration = 1000;
+    id('count').innerText = 0;
+    [].forEach.call(document.querySelectorAll(".star"), el => el.parentElement.removeChild(el));
+    [].forEach.call(document.querySelectorAll(".thread-wrap"), el => el.parentElement.removeChild(el));
+    
+    for (let i = 0; i < STAR_ROOT; i++) {
+        for (let j = 0; j < STAR_ROOT; j++) {
             if ((i + j) % 2 === 0) {
-                addStar(i/starRoot, j/starRoot);
+                addStar(i/STAR_ROOT, j/STAR_ROOT);
             }
         }
     }
@@ -195,7 +217,9 @@ function init() {
 
     try {
         if (screen.orientation && screen.orientation.lock) {
-            screen.orientation.lock('portrait');
+            screen.orientation.lock('portrait').catch(() => {
+                // ignore error
+            });
         } else {
             screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen .msLockOrientation;
             screen.lockOrientationUniversal('portrait-primary');
