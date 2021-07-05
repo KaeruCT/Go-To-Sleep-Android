@@ -119,7 +119,7 @@ a {
     transition: transform 1s ease-in-out;
 }
 
-img, a {
+img, a, label {
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -170,6 +170,60 @@ img, a {
 #count {
     right: 0;
 }
+
+#settings {
+    text-align: right;
+    font-size: 16px;
+}
+
+.checkbox {
+    position: absolute;
+    opacity: 0;
+}
+
+.checkbox + label {
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+}
+
+.checkbox + label:before {
+    content: '';
+    margin-right: 10px;
+    margin-top: 2px;
+    display: inline-block;
+    vertical-align: text-top;
+    width: 12px;
+    height: 12px;
+    background: transparent;
+    border: #faf 2px solid;
+}
+
+.checkbox:hover + label:before {
+    border: #fff 2px solid;
+}
+
+.checkbox:checked + label:before {
+    background: #faf;
+}
+
+.checkbox:checked + label:after {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 9px;
+    background: #faf;
+    width: 2px;
+    height: 2px;
+    box-shadow: 
+      2px 0 0 #325,
+      4px 0 0 #325,
+      4px -2px 0 #325,
+      4px -4px 0 #325,
+      4px -6px 0 #325,
+      4px -8px 0 #325;
+    transform: rotate(45deg);
+  }
 
 @keyframes spin {
     from {

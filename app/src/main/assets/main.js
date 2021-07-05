@@ -9,6 +9,30 @@ let filterDuration;
 
 const id = id => document.getElementById(id);
 
+const settings = {};
+function setSetting(key, val) {
+    settings[key] = val;
+    try {
+        localStorage.setItem(key, val);
+    } catch {}
+}
+function getSetting(key) {
+    try {
+        if (!settings[key]) {
+            settings[key] = localStorage.getItem(key);
+        }
+    } catch {}
+    return settings[key];
+}
+
+function setEffectsDisabled(enabled) {
+    setSetting("effects", enabled ? "" : "disabled");
+}
+
+function effectsDisabled() {
+    return getSetting("effects") !== "disabled";
+}
+
 function randomRange(min, max) {
     return Math.floor(Math.random()*(max-min+1)+min);
 }
@@ -46,17 +70,21 @@ let increasingSleepiness = false;
 function increaseSleepiness () {
     if (increasingSleepiness) return;
     increasingSleepiness = true;
-    const filters = [
-        'blur(5px)',
-        'grayscale(80%)',
-        'hue-rotate(180deg)',
-        'invert(100%) brightness(30%)',
-        'brightness(40%)',
-    ];
-    const gameStyle = id('game').style;
-    gameStyle.transition = `filter ${filterDuration/2}ms linear`;
 
-    gameStyle.filter = randomElement(filters);
+    const gameStyle = id('game').style;
+    
+    if (!effectsDisabled()) {
+        const filters = [
+            'blur(5px)',
+            'grayscale(80%)',
+            'hue-rotate(180deg)',
+            'invert(100%) brightness(30%)',
+            'brightness(40%)',
+        ];
+        
+        gameStyle.transition = `filter ${filterDuration/2}ms linear`;
+        gameStyle.filter = randomElement(filters);
+    }
     setTimeout(() => {
         gameStyle.filter = '';
         filterDuration += 200;
@@ -233,6 +261,13 @@ function init() {
         e.preventDefault();
         showScreen(el.dataset.screen);
     }));
+
+    // handle effect setting
+    id('effects').checked = effectsDisabled();
+    id('effects').addEventListener('change', (e) => {
+        setEffectsDisabled(e.target.checked);
+        e.preventDefault();
+    });
 
     showScreen('start', true);
 }
