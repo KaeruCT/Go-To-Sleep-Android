@@ -1,0 +1,8 @@
+## Bug fixes
+
+  - Fixed a bug that caused the game not to be reset properly when going back to the Start Screen and playing again.
+
+## New features
+
+  - Added a setting to toggle the sleepy effects.
+  - Added more sounds for the sheep.
