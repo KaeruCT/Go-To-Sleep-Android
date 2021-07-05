@@ -143,6 +143,7 @@ img, a {
 .sheep {
     width: 100px;
     height: 100px;
+    animation: swing-soft 4s ease-in-out infinite;
 }
 
 #back {
@@ -185,6 +186,15 @@ img, a {
     }
     50% {
         transform: rotate(-25deg);
+    }
+}
+
+@keyframes swing-soft {
+    0%, 100% {
+        transform: rotate(15deg);
+    }
+    50% {
+        transform: rotate(-15deg);
     }
 }
 
