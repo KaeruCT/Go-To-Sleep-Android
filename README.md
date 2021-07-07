@@ -1,5 +1,8 @@
 # Go-To-Sleep-Android
 
+
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="75">](https://f-droid.org/packages/com.kaeruct.gotosleep/)
+
 Count sheep until you fall asleep!
 
 This web-based Android app is based on [Android-PWA-Wrapper](https://github.com/xtools-at/Android-PWA-Wrapper).
