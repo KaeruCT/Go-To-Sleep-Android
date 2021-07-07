@@ -75,6 +75,7 @@ a {
 
 .about {
     text-align: center;
+    font-size: 0.8em;
 }
 
 .about-star {
@@ -223,7 +224,37 @@ img, a, label {
       4px -6px 0 #325,
       4px -8px 0 #325;
     transform: rotate(45deg);
-  }
+}
+
+.explosion {
+    opacity: 0.6;
+    will-change: transform;
+    transition: transform .3s ease-in, opacity .3s ease-in;
+    pointer-events: none;
+}
+
+.easter-egg {
+    text-align: center;
+}
+
+.row {
+    padding: 10px 0;
+}
+
+.spacer {
+    display: inline-block;
+    width: 100px;
+}
+
+.spacer-small {
+    display: inline-block;
+    width: 25px;
+}
+
+.play-sound {
+    width: 75px;
+    height: 75px;
+}
 
 @keyframes spin {
     from {

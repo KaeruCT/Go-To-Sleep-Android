@@ -9,4 +9,5 @@
     <string name="back_to_start">Ir al Comienzo</string>
     <string name="about_description">¡Contá ovejas hasta dormirte!</string>
     <string name="about_credit"><![CDATA[Hecho con ❤ por<br>Andrés Villarreal]]></string>
+    <string name="see_source_code">¿Quieres ver el código fuente? </string>
 </resources>

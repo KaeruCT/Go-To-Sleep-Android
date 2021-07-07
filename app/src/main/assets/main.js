@@ -2,6 +2,10 @@ const gameScreen = {};
 const STAR_ROOT = 10;
 const MAX_SHEEP = 10;
 const BAHS = ["bah1.mp3", "bah2.mp3", "bah3.mp3", "bah4.mp3", "bah5.mp3"];
+const COLORS = [
+    '#aff', '#faf', '#ffa',
+    '#aaf', '#afa', '#faa',
+];
 let maxSheep;
 let sheepCount;
 let sleepiness;
@@ -139,14 +143,6 @@ function updateCount() {
     }
 }
 
-function threadBg() {
-    const colors = [
-        '#aff', '#faf', '#ffa',
-        '#aaf', '#afa', '#faa',
-    ];
-    return randomElement(colors);
-}
-
 function addStar(x, y) {
     const starWidth = randomRange(gameScreen.width*0.03, gameScreen.width*0.2);
     const top = x * (gameScreen.height+starWidth/2) - starWidth/2;
@@ -158,7 +154,7 @@ function addStar(x, y) {
 }
 
 function addSheep(x) {
-    const sheepAlive = document.querySelectorAll(".thread-wrap").length;
+    const sheepAlive = document.querySelectorAll('.thread-wrap').length;
     if (sheepAlive >= maxSheep) return;
 
     const height = gameScreen.height;
@@ -167,7 +163,7 @@ function addSheep(x) {
     const sheepX = `${gameScreen.width*x}px`; 
     const sheepHiddenY = `-${gameScreen.height*1.3}px`;
     const wrapStyle = `transform: translate(${sheepX}, ${sheepHiddenY})`;
-    const threadStyle = `height: ${height}px; background: ${threadBg()}`;
+    const threadStyle = `height: ${height}px; background: ${randomElement(COLORS)}`;
     const sheepWrapStyle = `transform: translateY(${(height - halfSheepHeight)}px)`;
     const sheep = `<div class="sheep-wrap" style="${sheepWrapStyle}"><img class="sheep" src="sheep.png"></div>`;
     const thread = `<div class="thread" style="${threadStyle}">${sheep}</div>`;
@@ -218,9 +214,9 @@ function initGame() {
     sleepiness = 0;
     filterDuration = 1000;
     id('count').innerText = 0;
-    [].forEach.call(document.querySelectorAll(".star"), el => el.parentElement.removeChild(el));
-    [].forEach.call(document.querySelectorAll(".thread-wrap"), el => el.parentElement.removeChild(el));
-    
+    [].forEach.call(document.querySelectorAll('.star'), el => el.parentElement.removeChild(el));
+    [].forEach.call(document.querySelectorAll('.thread-wrap'), el => el.parentElement.removeChild(el));
+
     for (let i = 0; i < STAR_ROOT; i++) {
         for (let j = 0; j < STAR_ROOT; j++) {
             if ((i + j) % 2 === 0) {
@@ -232,6 +228,20 @@ function initGame() {
         addSheep(i/(maxSheep-1));
     }
     startCounter();
+}
+
+function explode(el, x, y) {
+    const clone = el.cloneNode();
+    el.parentElement.append(clone);
+    clone.classList.add('explosion');
+    clone.style.position = 'absolute';
+    clone.style.left = `${x - clone.width / 2}px`;
+    clone.style.top = `${y - clone.height / 2}px`;
+    clone.style.transform = `scale(5) rotate(${randomRange(180, -180)}deg)`;
+    clone.style.opacity = 0;
+    setTimeout(() => {
+        clone.parentElement.removeChild(clone);
+    }, 300);
 }
 
 function init() {
@@ -269,7 +279,31 @@ function init() {
         e.preventDefault();
     });
 
+    // easter-egg
+    let tapCount = 0;
+    let tapTimeout;
+    [].forEach.call(document.querySelectorAll('.logo img'), (el) => {
+        el.addEventListener('click', function (e) {
+            tapCount += 1;
+            if (tapCount > 20) {
+                tapCount = 0;
+                showScreen('easter-egg');
+            } else {
+                if (tapTimeout) clearTimeout(tapTimeout);
+                tapTimeout = setTimeout(() => tapCount = 0, 400);
+                explode(el, e.clientX, e.clientY);
+            }
+        });
+    });
+
+    [].forEach.call(document.querySelectorAll('.play-sound'), (el, i) => {
+            el.addEventListener('click', function (e) {
+                explode(el, e.clientX, e.clientY);
+                playSound(BAHS[i % BAHS.length]);
+            });
+            el.style.filter = `opacity(0.6) saturate(500%) drop-shadow(-1px -1px 5px ${COLORS[i % COLORS.length]})`;
+        });
+
     showScreen('start', true);
 }
-
 init();
