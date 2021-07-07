@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name" translatable="false">Go To Sleep</string>
+    <string name="offline_heading">Estás offline.</string>
+    <string name="offline_description">¡Tocá para reintentar!</string>
+    <string name="noapp_heading">App no encontrada.</string>
+    <string name="noapp_description">Ninguna App en este dispositivo puede llevar a cabo la acción.</string>
+</resources>
