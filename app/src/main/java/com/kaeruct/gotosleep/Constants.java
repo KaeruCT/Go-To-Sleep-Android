@@ -2,8 +2,6 @@ package com.kaeruct.gotosleep;
 
 public class Constants {
     public Constants(){}
-    // Root page
-    public static String WEBAPP_URL = "file:///android_asset/index.html";
 
 	// User Agent tweaks
     public static boolean POSTFIX_USER_AGENT = true; // set to true to append USER_AGENT_POSTFIX to user agent

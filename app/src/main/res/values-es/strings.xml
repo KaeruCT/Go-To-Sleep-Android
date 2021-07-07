@@ -1,7 +1,12 @@
 <resources>
-    <string name="app_name" translatable="false">Go To Sleep</string>
     <string name="offline_heading">Estás offline.</string>
     <string name="offline_description">¡Tocá para reintentar!</string>
     <string name="noapp_heading">App no encontrada.</string>
     <string name="noapp_description">Ninguna App en este dispositivo puede llevar a cabo la acción.</string>
+    <string name="start_game">Empezar Juego</string>
+    <string name="about">Acerca de</string>
+    <string name="disable_effects"><![CDATA[Apagar efectos <small>(mejora&nbsp;rendimiento)</small>]]></string>
+    <string name="back_to_start">Ir al Comienzo</string>
+    <string name="about_description">¡Contá ovejas hasta dormirte!</string>
+    <string name="about_credit"><![CDATA[Hecho con ❤ por<br>Andrés Villarreal]]></string>
 </resources>

@@ -3,26 +3,30 @@ package com.kaeruct.gotosleep.ui;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.webkit.WebView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.kaeruct.gotosleep.Constants;
 import com.kaeruct.gotosleep.R;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.nio.charset.StandardCharsets;
+
 public class UIManager {
-    // Instance variables
-    private Activity activity;
-    private WebView webView;
-    private ProgressBar progressSpinner;
-    private ProgressBar progressBar;
+    private final Activity activity;
+    private final WebView webView;
+    private final ProgressBar progressSpinner;
+    private final ProgressBar progressBar;
     private boolean pageLoaded = false;
 
     public UIManager(Activity activity) {
@@ -30,7 +34,49 @@ public class UIManager {
         this.progressBar = (ProgressBar) activity.findViewById(R.id.progressBarBottom);
         this.progressSpinner = (ProgressBar) activity.findViewById(R.id.progressSpinner);
         this.webView = (WebView) activity.findViewById(R.id.webView);
-        webView.loadUrl(Constants.WEBAPP_URL);
+        String html = "";
+        try {
+            html = replaceStrings(getIndexFile());
+        } catch (IOException e) {
+            // ignore
+        }
+        webView.loadDataWithBaseURL("file:///android_asset/", html, "text/html", "utf-8", null);
+    }
+
+    private String getIndexFile() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        BufferedReader br = null;
+        try {
+            InputStream is = activity.getAssets().open("index.html");
+            br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8 ));
+            String str;
+            while ((str = br.readLine()) != null) {
+                sb.append(str);
+            }
+        } finally {
+            if (br != null) {
+                br.close();
+            }
+        }
+        return sb.toString();
+    }
+
+    private String replaceStrings(String content) {
+        for (Field field : R.string.class.getDeclaredFields()) {
+            if (Modifier.isStatic(field.getModifiers()) && !Modifier.isPrivate(field.getModifiers()) && field.getType().equals(int.class))  {
+                try {
+                    int id = field.getInt(null);
+                    String key = field.getName();
+                    String value = this.activity.getString(id);
+                    content = content.replaceAll("\\{" + key + "\\}", value);
+                } catch (IllegalArgumentException e) {
+                    // ignore
+                } catch (IllegalAccessException e) {
+                    // ignore
+                }
+            }
+        }
+        return content;
     }
 
     // Set Loading Progress for ProgressBar

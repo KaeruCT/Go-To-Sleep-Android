@@ -22,11 +22,10 @@ import com.kaeruct.gotosleep.R;
 import com.kaeruct.gotosleep.ui.UIManager;
 
 public class WebViewHelper {
-    // Instance variables
-    private Activity activity;
-    private UIManager uiManager;
-    private WebView webView;
-    private WebSettings webSettings;
+    private final Activity activity;
+    private final UIManager uiManager;
+    private final WebView webView;
+    private final WebSettings webSettings;
 
     public WebViewHelper(Activity activity, UIManager uiManager) {
         this.activity = activity;
@@ -158,7 +157,7 @@ public class WebViewHelper {
     // handle external urls
     private boolean handleUrlLoad(WebView view, String url) {
         // prevent loading content that isn't ours
-        if (!url.startsWith(Constants.WEBAPP_URL)) {
+        if (!url.startsWith("data") && !url.startsWith("file:///android_asset/")) {
             // stop loading
             // stopping only would cause the PWA to freeze, need to reload the app as a workaround
             view.stopLoading();

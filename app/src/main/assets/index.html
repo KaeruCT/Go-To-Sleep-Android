@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Go To Sleep</title>
+    <title>{app_name}</title>
     <link rel="stylesheet" type="text/css" href="./boom.css" media="all">
     <meta name="theme-color" content="#111133"/>
     <link rel="manifest" href="./manifest.json">
@@ -14,18 +14,18 @@
         <div class="container">
             <div class="logo">
                 <img src="./sheep.png">
-                Go To Sleep
+                {app_name}
             </div>
-            <a class="nav" href="#" data-screen="game">Start Game</a>
-            <a class="nav" href="#" data-screen="about">About</a>
+            <a class="nav" href="#" data-screen="game">{start_game}</a>
+            <a class="nav" href="#" data-screen="about">{about}</a>
             <div id="settings">
                 <input class="checkbox" type="checkbox" id="effects" />
-                <label for="effects">Disable effects <small>(improves&nbsp;performance)</small></label>
+                <label for="effects">{disable_effects}</label>
             </div>
         </div>  
     </div>
     <div class="screen" id="game">
-        <div id="back"><a href="#" data-screen="start">Back to Start</a></div>
+        <div id="back"><a href="#" data-screen="start">{back_to_start}</a></div>
         <div id="time"></div>
         <div id="count"></div>
     </div>
@@ -35,11 +35,11 @@
                 <img class="about-star" src="./star.png">
             </div>
             <p class="about">
-                Count sheep until you fall asleep!<br><br>
-                Made with ❤ by<br>Andr&eacute;s Villarreal
+                {about_description}<br><br>
+                {about_credit}
             </p>
             <br><br>
-            <a class="nav" href="#" data-screen="start">Back to Start</a>
+            <a class="nav" href="#" data-screen="start">{back_to_start}</a>
         </div>
     </div>
     <script src="./main.js"></script>
