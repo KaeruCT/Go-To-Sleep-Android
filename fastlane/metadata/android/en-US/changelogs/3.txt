@@ -1,0 +1,4 @@
+## New features
+
+  - Added Spanish translation in-game.
+  - Added an easter egg.
