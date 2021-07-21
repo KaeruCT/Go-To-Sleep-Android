@@ -101,6 +101,7 @@ function increaseSleepiness () {
 let transitioningScreen = false;
 let topScreenIndex = 1;
 function showScreen(screenId, skipAnim) {
+    gameScreen.currentScreen = screenId;
     function forAllOtherScreens (fn) {
         [].forEach.call(document.querySelectorAll('.screen'), el => {
             if (el.id === screenId) return;
@@ -207,16 +208,8 @@ function startCounter() {
     countTime();
 }
 
-function initGame() {
-    maxSheep = 3;
-    sleepiness = 0;
-    sheepCount = 0;
-    sleepiness = 0;
-    filterDuration = 1000;
-    id('count').innerText = 0;
+function initStars() {
     [].forEach.call(document.querySelectorAll('.star'), el => el.parentElement.removeChild(el));
-    [].forEach.call(document.querySelectorAll('.thread-wrap'), el => el.parentElement.removeChild(el));
-
     for (let i = 0; i < STAR_ROOT; i++) {
         for (let j = 0; j < STAR_ROOT; j++) {
             if ((i + j) % 2 === 0) {
@@ -224,6 +217,17 @@ function initGame() {
             }
         }
     }
+}
+
+function initGame() {
+    maxSheep = 3;
+    sleepiness = 0;
+    sheepCount = 0;
+    sleepiness = 0;
+    filterDuration = 1000;
+    id('count').innerText = 0;
+    initStars();
+    [].forEach.call(document.querySelectorAll('.thread-wrap'), el => el.parentElement.removeChild(el));
     for (let i = 0; i < maxSheep; i++) {
         addSheep(i/(maxSheep-1));
     }
@@ -250,6 +254,9 @@ function init() {
         const b = document.getElementsByTagName('body')[0];
         gameScreen.width = window.innerWidth || e.clientWidth || b.clientWidth;
         gameScreen.height = window.innerHeight || e.clientHeight || b.clientHeight;
+        if (gameScreen.currentScreen === 'game') {
+            initStars();
+        }
     }
     resize();
     window.addEventListener('resize', resize);
