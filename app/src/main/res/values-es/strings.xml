@@ -6,7 +6,7 @@
     <string name="start_game">Empezar Juego</string>
     <string name="about">Acerca de</string>
     <string name="disable_effects"><![CDATA[Apagar efectos <small>(mejora&nbsp;rendimiento)</small>]]></string>
-    <string name="back_to_start">Ir al Comienzo</string>
+    <string name="back_to_home">Ir al Comienzo</string>
     <string name="about_description">¡Contá ovejas hasta dormirte!</string>
     <string name="about_credit"><![CDATA[Hecho con ❤ por<br>Andrés Villarreal]]></string>
     <string name="see_source_code">¿Quieres ver el código fuente? </string>

@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name" translatable="false">Go To Sleep</string>
     <string name="offline_heading">Anda sedang luring.</string>
     <string name="offline_description">Tekan disini untuk mengulang!</string>
     <string name="noapp_heading">Aplikasi tidak ditemukan.</string>
@@ -7,7 +6,7 @@
     <string name="start_game">Mulai Permainan</string>
     <string name="about">Tentang</string>
     <string name="disable_effects"><![CDATA[Matikan efek <small>(menaikkan&nbsp;performa)</small>]]></string>
-    <string name="back_to_start">Kembali ke Beranda</string>
+    <string name="back_to_home">Kembali ke Beranda</string>
     <string name="about_description">Hitung domba hingga Anda tertidur!</string>
     <string name="about_credit"><![CDATA[Dibuat dengan ❤ oleh<br>Andrés Villarreal]]></string>
     <string name="see_source_code">Apakah Anda ingin melihat kode sumber?</string>

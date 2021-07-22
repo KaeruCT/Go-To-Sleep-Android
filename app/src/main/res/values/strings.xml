@@ -7,7 +7,7 @@
     <string name="start_game">Start Game</string>
     <string name="about">About</string>
     <string name="disable_effects"><![CDATA[Disable effects <small>(improves&nbsp;performance)</small>]]></string>
-    <string name="back_to_start">Back to Home</string>
+    <string name="back_to_home">Back to Home</string>
     <string name="about_description">Count sheep until you fall asleep!</string>
     <string name="about_credit"><![CDATA[Made with ❤ by<br>Andrés Villarreal]]></string>
     <string name="see_source_code">Do you want to see the source code?</string>
