@@ -1,0 +1,7 @@
+## New features
+
+  - Added Indonesian translation.
+
+## Bug fixes
+
+  - Fixed landscape mode.
